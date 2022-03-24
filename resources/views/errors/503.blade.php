@@ -1,0 +1,1 @@
+<h1 style="display: flex; justify-content: center; align-items: center; height: 100vh">メンテナンス中</h1>

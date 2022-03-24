@@ -1,6 +1,10 @@
-$(window).on("load",function(){
-  $(".loader-wrapper").delay(2500).fadeOut("slow");
-});
+var i = 0;
+if (i === 0) {
+  $(window).on("load",function(){
+    $(".loader-wrapper").delay(2500).fadeOut("slow");
+    i++;
+  });
+}
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
