@@ -7,7 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\CategoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -164,12 +166,15 @@ Route::prefix('admin')->group(function() {
         return view('admin');
     });
     
-    Route::get('/category', function () {
-        return view('admin.category.index');
-    })->name('category.index');
+    Route::get('/create-list', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/create-category', [CategoryController::class, 'create'])->name('category.create');
     Route::post('/create-category', [CategoryController::class, 'store'])->name('category.store');
     Route::resource('category', CategoryController::class);
+
+    Route::get('/destination', [DestinationController::class, 'index'])->name('destination.index');
+    Route::get('/create-destination', [DestinationController::class, 'create'])->name('destination.create');
+    Route::post('/create-destination', [DestinationController::class, 'store'])->name('destination.store');
+    
 });
 
 
