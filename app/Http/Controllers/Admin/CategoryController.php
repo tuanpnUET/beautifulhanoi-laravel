@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         //action get all category
         $categories = Category::all();
-        return view('admin.category.index', ['categories' => $categories]);
+        return view('admin.category.index', compact('categories','categories'));
     }
 
     /**
@@ -41,8 +41,7 @@ class CategoryController extends Controller
         $category = new Category;
         $category->name = $request->name;
         $category->save();
-
-        return view('admin.category.store');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -65,8 +64,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('admin.category.edit', ['category' => $category]);
+        $category = Category::findOrFail($id);
+        return view('admin.category.edit', compact('category','category'));
     }
 
     /**
@@ -78,10 +77,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        $category->name = $request->name;
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $category = Category::findOrFail($id);
+        $category->name = $request->input('name');
         $category->save();
-        return view('admin.category.update');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -92,7 +94,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::destroy($id);
-        return view('admin.category.delete');
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return redirect()->route('category.index');
     }
 }

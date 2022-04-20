@@ -2,12 +2,12 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\CategoryController;
 
 /*
@@ -81,60 +81,51 @@ Route::any('test', function(Request $request) {
 });
 Route::redirect('test', 'show-form');
 Route::view('show-form', 'form');
-Route::prefix('admin')->group(function(){
+// Route::prefix('admin')->group(function(){
 
-    Route::get('/', function() {
-        return view('admin');
-    })->name('admin');
+//     Route::get('/', function() {
+//         return view('admin');
+//     })->name('admin');
 
-    Route::get('/test/{id?}', function($id=null) {
-        $content = 'Call action get of path /test';
-        $content.=' id = '.$id;
-        return $content;
-    });
+//     Route::get('/test/{id?}', function($id=null) {
+//         $content = 'Call action get of path /test';
+//         $content.=' id = '.$id;
+//         return $content;
+//     });
 
-    Route::get('/test/{slug}-{id}.html', function($slug=null, $id=null) {
-        $content = 'Call action get of path /test';
-        $content.=' id = '.$id.'<br/>';
-        $content.=' slug = '.$slug;
-        return $content;
-    })->where(
-        [
-            'slug' => '.+',
-            'id' => '[0-9]+',
-        ]
-    );
-    Route::get('/detail/{slug}-{id?}.html', function($slug=null, $id=null) {
-        $content = 'Call action get of path /detail';
-        $content.=' id = '.$id.'<br/>';
-        $content.=' slug = '.$slug;
-        return $content;
-    })->where('slug', '.+')->where('id', '[0-9]+')->name('admin.detail.id');
+//     Route::get('/test/{slug}-{id}.html', function($slug=null, $id=null) {
+//         $content = 'Call action get of path /test';
+//         $content.=' id = '.$id.'<br/>';
+//         $content.=' slug = '.$slug;
+//         return $content;
+//     })->where(
+//         [
+//             'slug' => '.+',
+//             'id' => '[0-9]+',
+//         ]
+//     );
+//     Route::get('/detail/{slug}-{id?}.html', function($slug=null, $id=null) {
+//         $content = 'Call action get of path /detail';
+//         $content.=' id = '.$id.'<br/>';
+//         $content.=' slug = '.$slug;
+//         return $content;
+//     })->where('slug', '.+')->where('id', '[0-9]+')->name('admin.detail.id');
 
-    Route::get('/show-form', function() {
-        return view('forms.form');
-    })->name('show-form');
+//     Route::get('/show-form', function() {
+//         return view('forms.form');
+//     })->name('show-form');
 
-    Route::prefix('/product')->middleware('checkpermission')->group(function(){
-        Route::get('/', function(){
-            return 'list product';
-        })->name('admin.product');
+//     Route::prefix('/product')->middleware('checkpermission')->group(function(){
+//         Route::get('/', function(){
+//             return 'list product';
+//         })->name('admin.product');
         
-        Route::get('/add', function(){
-            return 'add product';
-        })->name('admin.product.add');
+//         Route::get('/add', function(){
+//             return 'add product';
+//         })->name('admin.product.add');
 
-    });
-});
-
-// article route
-Route::get('/article-list', [ArticleController::class, 'index'])->name('article.index');
-Route::get('/create-article', [ArticleController::class, 'create'])->name('article.create');
-Route::post('/create-article', [ArticleController::class, 'store'])->name('article.store');
-Route::get('/edit-article/{id}', [ArticleController::class, 'edit'])->name('article.edit');
-Route::post('/edit-article', [ArticleController::class, 'update'])->name('article.update');
-Route::get('/delete-article/{id}', [ArticleController::class, 'show'])->name('article.show');
-Route::post('/delete-article', [ArticleController::class, 'delete'])->name('article.delete');
+//     });
+// });
 
 // client router
 Route::get('/', function () {
@@ -161,24 +152,20 @@ Route::get('/travel', function () {
     return view('travel');
 })->name('travel');
 
-// admin router
-Route::prefix('admin')->group(function() {
-    Route::get('/', function () {
-        return view('admin');
-    });
-    
-    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
-    Route::get('/create-category', [CategoryController::class, 'create'])->name('category.create');
-    Route::post('/create-category', [CategoryController::class, 'store'])->name('category.store');
-    Route::resource('category', CategoryController::class);
+// article route
+Route::get('/article-list', [ArticleController::class, 'index'])->name('article.index');
+Route::get('/create-article', [ArticleController::class, 'create'])->name('article.create');
+Route::post('/create-article', [ArticleController::class, 'store'])->name('article.store');
+Route::get('/edit-article/{id}', [ArticleController::class, 'edit'])->name('article.edit');
+Route::post('/edit-article', [ArticleController::class, 'update'])->name('article.update');
+Route::get('/delete-article/{id}', [ArticleController::class, 'show'])->name('article.show');
+Route::post('/delete-article', [ArticleController::class, 'delete'])->name('article.delete');
 
-    Route::get('/destination', [DestinationController::class, 'index'])->name('destination.index');
-    Route::get('/create-destination', [DestinationController::class, 'create'])->name('destination.create');
-    Route::post('/create-destination', [DestinationController::class, 'store'])->name('destination.store');
-    
+Auth::routes();
+// admin router
+Route::prefix('dashboard')->group(function() {
+    Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+    Route::resource('category', CategoryController::class); 
 });
 
-
-
-
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

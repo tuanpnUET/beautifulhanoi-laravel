@@ -1,38 +1,33 @@
-<!doctype html>
-<html lang="ja">
-  <head>
-    <title>カテゴリー</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  </head>
-  <body class="p-3">
-    <h2 style="margin-top: 10px" >カテゴリー一覧</h2>
-    <p><a href="<?php echo route('category.create') ?>" class="btn btn-primary">追加</a></p>
-    <br/>
-    <table class="table table-light table-bordered" style="width: 40%">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">分野</th>
-                <th scope="col" style="display:flex;justify-content:center;">オプション</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($categories as $category)
-            <tr>
-                <td>{{ $category->id }}</td>
-                <td>{{ $category->name }}</td>
-                <td style="display:flex;justify-content:space-around;">
-                    <a href="#" class="btn btn-warning">修正</a> 
-                    <a href="#" class="btn btn-danger">削除</a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  </body>
-</html>
+@extends('layouts.admin')
+@section('content-dashboard')
+<div class="container">
+      <p style="font-size: 20px; text-align: center; font-weight: bold;">カテゴリー一覧</p>
+      <p style="padding-left: 30%;"><a href="<?php echo route('category.create') ?>" class="btn btn-primary">追加</a></p>
+      <br/>
+      <table class="table table-light table-bordered" style="margin-left: auto; margin-right: auto; width: 40%;">
+          <thead>
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">分野</th>
+                  <th scope="col" style="display:flex;justify-content:center;">オプション</th>
+              </tr>
+          </thead>
+          <tbody>
+              @foreach ($categories as $category)
+              <tr>
+                  <td>{{ $category->id }}</td>
+                  <td>{{ $category->name }}</td>
+                  <td style="display:flex;justify-content:space-around;">
+                      <a href="{{ route('category.edit', $category->id) }}" class="btn btn-warning">修正</a>
+                      <form action="{{ route('category.destroy', $category->id) }}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button class="btn btn-danger">削除</button>
+                        </form>
+                  </td>
+              </tr>
+              @endforeach
+          </tbody>
+      </table>
+</div>
+@endsection

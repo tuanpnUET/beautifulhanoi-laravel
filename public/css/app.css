@@ -1451,6 +1451,11 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.top-right {
+  position: absolute; 
+  right: 10px;
+  top: 10px;
+}
 .myTab {
 	width: 14%; 
 	justify-content: center;
