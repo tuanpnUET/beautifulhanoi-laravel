@@ -26,6 +26,7 @@
     </div>
     <div class="form-group">
       <label for="image">イメージ</label>
+      <p style="opacity: 0.5">画像を変更したくない場合はそのままにしておきます。</p>
       <input type="file" class="form-control" id="image" name="image" value="{{ $vehicle->image }}">
     </div>
       {{ method_field('PUT') }}

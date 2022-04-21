@@ -30,8 +30,10 @@
     </div>
     <div class="form-group">
       <label for="image">イメージ</label>
+      <p style="opacity: 0.5">画像を変更したくない場合はそのままにしておきます。</p>
       <input type="file" class="form-control" id="image" name="image" value="{{ $destination->image }}">
     </div>
+    <br>
       {{ method_field('PUT') }}
       <button type="submit" class="btn btn-primary" style="color: black">修正</button>
     </form>

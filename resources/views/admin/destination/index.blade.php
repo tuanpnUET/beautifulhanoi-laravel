@@ -18,7 +18,7 @@
                   <th scope="col">住所</th>
                   <th scope="col">リンク</th>
                   <th scope="col">イメージ</th>
-                  <th scope="col">営業中</th>
+                  <th scope="col" style="width: 120px;">営業中</th>
                   <th scope="col" style="width: 90px;">オプション</th>
               </tr>
           </thead>
