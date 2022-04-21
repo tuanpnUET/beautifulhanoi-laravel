@@ -41,7 +41,7 @@ class CategoryController extends Controller
         $category = new Category;
         $category->name = $request->name;
         $category->save();
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('success', 'データが追加されました');
     }
 
     /**
@@ -83,7 +83,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->name = $request->input('name');
         $category->save();
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('success', 'データが更新されました');
     }
 
     /**
@@ -96,6 +96,6 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('success', '正常に削除されました');
     }
 }

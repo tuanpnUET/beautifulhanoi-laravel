@@ -4,6 +4,11 @@
       <p style="font-size: 20px; text-align: center; font-weight: bold;">カテゴリー一覧</p>
       <p style="padding-left: 30%;"><a href="<?php echo route('category.create') ?>" class="btn btn-primary">追加</a></p>
       <br/>
+        @if(\Session::has('success'))
+        <div class="alert alert-success" style="margin-left: auto; margin-right: auto; width: 40%;">
+            <p>{{ \Session::get('success') }}</p>
+        </div>
+        @endif
       <table class="table table-light table-bordered" style="margin-left: auto; margin-right: auto; width: 40%;">
           <thead>
               <tr>
