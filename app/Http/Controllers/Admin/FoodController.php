@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Food;
 
-class CategoryController extends Controller
+class FoodController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //action get all category
-        $categories = Category::paginate(4);
-        return view('admin.category.index', compact('categories','categories'));
+        $foods = Food::paginate(4);
+        return view('admin.food.index', compact('foods','foods'));
     }
 
     /**
@@ -27,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.food.create');
     }
 
     /**
@@ -38,10 +37,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category;
-        $category->name = $request->name;
-        $category->save();
-        return redirect()->route('category.index')->with('success', 'データが追加されました');
+        $food = new Food;
+        $food->categoryId = 2;
+        $food->name = $request->name;
+        $food->description = $request->description;
+        $food->image = '';
+        $food->save();
+        return redirect()->route('food.index')->with('success', 'データが追加されました');
     }
 
     /**
@@ -52,8 +54,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::find($id);
-        return view('admin.category.show', ['category' => $category]);
+        $food = Food::find($id);
+        return view('admin.food.show', ['food' => $food]);
     }
 
     /**
@@ -64,8 +66,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('admin.category.edit', compact('category','category'));
+        $food = Food::findOrFail($id);
+        return view('admin.food.edit', compact('food','food'));
     }
 
     /**
@@ -77,13 +79,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-        ]);
-        $category = Category::findOrFail($id);
-        $category->name = $request->input('name');
-        $category->save();
-        return redirect()->route('category.index')->with('success', 'データが更新されました');
+        $food = Food::findOrFail($id);
+        $food->name = $request->input('name');
+        $food->description = $request->input('description');
+        $food->image = '';
+        $food->save();
+        return redirect()->route('food.index')->with('success', 'データが更新されました');
     }
 
     /**
@@ -94,8 +95,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-        return redirect()->route('category.index')->with('success', '正常に削除されました');
+        $food = Food::findOrFail($id);
+        $food->delete();
+        return redirect()->route('food.index')->with('success', '正常に削除されました');
     }
 }

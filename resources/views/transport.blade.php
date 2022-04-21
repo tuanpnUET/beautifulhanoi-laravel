@@ -25,6 +25,7 @@
 				<a style="text-decoration: unset;" class="type5 hov myTab" href="food">名物料理</a>
 				<a style="text-decoration: unset;" class="type5 hov myTab" href="festival">お祭り</a>
 				<a style="text-decoration: unset;" class="type5 hov myTab" href="transport">交通</a>
+				<a style="text-decoration: unset;" class="type5 hov myTab" href="{{ route('login') }}">管理者</a>
 			</div>
 		</header>
 		<br><br>

@@ -19,11 +19,20 @@
 				<div class="centered"><p style='color: white; font-size: 6vw;'>美しいハノイ</p></div>
 			</div>
 		</header>
+        @guest
+            @if (Route::has('login'))
+            <p style="font-size: 16px; padding-left: 20%; padding-top: 50px;">すでにアカウントをお持ちの場合は<a href="{{ route('login') }}" style="color: red">ログイン</a>ください。</p><br>
+            @endif
+            @if (Route::has('register'))
+            <p style="font-size: 16px; padding-left: 20%">アカウントを持っていない方は<a href="{{ route('register') }}" style="color: red">こちらへ</a>。</p>
+            @endif
+        @else
         <div class="bg_menu">
-            <a style="text-decoration: unset;" class="type5 hov myTab" href='<?php echo route('category.index') ?>'>カテゴリー</a>
-            <a style="text-decoration: unset;" class="type5 hov myTab" href='#'>Travel</a>
-            <a style="text-decoration: unset;" class="type5 hov myTab" href='#'>Festival</a>
-            <a style="text-decoration: unset;" class="type5 hov myTab" href='#'>Destination</a>
+            <a style="text-decoration: unset;" class="type5 hov myTab" href='<?php echo route('destination.index') ?>'>観光地の管理</a>
+            <a style="text-decoration: unset;" class="type5 hov myTab" href='<?php echo route('category.index') ?>'>カテゴリーの管理</a>
+            <a style="text-decoration: unset;" class="type5 hov myTab" href='<?php echo route('festival.index') ?>'>お祭りの管理</a>
+            <a style="text-decoration: unset;" class="type5 hov myTab" href='<?php echo route('food.index') ?>'>料理の管理</a>
+            <a style="text-decoration: unset;" class="type5 hov myTab" href='<?php echo route('vehicle.index') ?>'>車両の管理</a>
         </div>
         <br>
         <div class="container">
@@ -36,10 +45,11 @@
                 @csrf
             </form>
         </div>
-    </div><br>
-    <div class="container" style="display: flex; align-content: center;">
-        @yield('content-dashboard') 
-    </div>
+        </div><br>
+        <div class="container" style="display: flex; align-content: center;">
+            @yield('content-dashboard') 
+        </div>
+        @endguest
     <br><br><hr>
     <footer class="container">
      <div class="col-md-4 col-xs-12 bg type14" >

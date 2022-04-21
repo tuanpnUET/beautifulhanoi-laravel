@@ -34,5 +34,6 @@
               @endforeach
           </tbody>
       </table>
+      <div style="margin-left: 58%; margin-right: auto;">{!! $categories->withQueryString()->links('pagination::bootstrap-4') !!}</div>
 </div>
 @endsection
