@@ -16,6 +16,7 @@
                   <th scope="col" style="width: 160px;">お祭り</th>
                   <th scope="col">説明</th>
                   <th scope="col" style="width: 150px;">時間</th>
+                  <th scope="col">イメージ</th>
                   <th scope="col" style="width: 90px;">オプション</th>
               </tr>
           </thead>
@@ -26,6 +27,7 @@
                   <td>{{ $festival->name }}</td>
                   <td>{{ $festival->description }}</td>
                   <td>{{ $festival->duration }}</td>
+                  <td><img src="../../images/{{ $festival->image }}" style="height: auto; width: 200px" />{{ $festival->image }}</td>
                   <td style="flex-direction: column; ">
                       <a href="{{ route('festival.edit', $festival->id) }}" class="btn btn-warning" style="margin-bottom: 10px">修正</a>
                       <form action="{{ route('festival.destroy', $festival->id) }}" method="POST">

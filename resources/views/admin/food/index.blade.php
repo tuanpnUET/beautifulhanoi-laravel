@@ -15,6 +15,7 @@
                   <th scope="col">ID</th>
                   <th scope="col" style="width: 160px;">料理</th>
                   <th scope="col">説明</th>
+                  <th scope="col">イメージ</th>
                   <th scope="col" style="width: 90px;">オプション</th>
               </tr>
           </thead>
@@ -24,6 +25,7 @@
                   <td>{{ $food->id }}</td>
                   <td>{{ $food->name }}</td>
                   <td>{{ $food->description }}</td>
+                  <td><img src="../../images/{{ $food->image }}" style="height: auto; width: 400px" />{{ $food->image }}</td>
                   <td style="flex-direction: column; ">
                       <a href="{{ route('food.edit', $food->id) }}" class="btn btn-warning" style="margin-bottom: 10px">修正</a>
                       <form action="{{ route('food.destroy', $food->id) }}" method="POST">

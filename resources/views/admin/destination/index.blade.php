@@ -17,7 +17,7 @@
                   <th scope="col">説明</th>
                   <th scope="col">住所</th>
                   <th scope="col">リンク</th>
-                  <th scope="col">Image</th>
+                  <th scope="col">イメージ</th>
                   <th scope="col">営業中</th>
                   <th scope="col" style="width: 90px;">オプション</th>
               </tr>
@@ -30,7 +30,7 @@
                   <td>{{ $destination->description }}</td>
                   <td>{{ $destination->address }}</td>
                   <td><a href="{{ $destination->link }}" style="color: blue">{{ $destination->link }}</a></td>
-                  <td><img src="../../images/{{ $destination->image }}" style="height: 50px;" />{{ $destination->image }}</td>
+                  <td><img src="../../images/{{ $destination->image }}" style="height: auto; width: 200px" />{{ $destination->image }}</td>
                   <td>{{ $destination->openingTime }}</td>
                   <td style="flex-direction: column; ">
                       <a href="{{ route('destination.edit', $destination->id) }}" class="btn btn-warning" style="margin-bottom: 10px">修正</a>

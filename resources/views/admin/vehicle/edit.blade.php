@@ -2,7 +2,7 @@
 @section('content-dashboard')
 <div class="container">
     <p style="font-size: 20px; text-align: center; font-weight: bold;">車両修正</p>
-    <form method="post" action="{{ route('vehicle.update', $vehicle->id) }}">
+    <form method="post" action="{{ route('vehicle.update', $vehicle->id) }}" enctype="multipart/form-data">
       {{ csrf_field() }}
     <div class="form-group">
       <label for="categoryId">カテゴリーID</label>
@@ -23,6 +23,10 @@
     <div class="form-group">
       <label for="note">ノート</label>
       <input type="text" class="form-control" id="note" name="note" value="{{ $vehicle->note }}">
+    </div>
+    <div class="form-group">
+      <label for="image">イメージ</label>
+      <input type="file" class="form-control" id="image" name="image" value="{{ $vehicle->image }}">
     </div>
       {{ method_field('PUT') }}
       <button type="submit" class="btn btn-primary" style="color: black">修正</button>

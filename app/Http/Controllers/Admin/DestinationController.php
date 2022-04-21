@@ -46,7 +46,12 @@ class DestinationController extends Controller
         $destination->address = $request->address;
         $destination->link = $request->link;
         $destination->openingTime = $request->openingTime;
-        $destination->image = $request->image;
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $destination->image = $name;
+        }
         $destination->save();
         return redirect()->route('destination.index')->with('success', 'データが追加されました');
     }
@@ -91,7 +96,12 @@ class DestinationController extends Controller
         $destination->address = $request->input('address');
         $destination->link = $request->input('link');
         $destination->openingTime = $request->input('openingTime');
-        $destination->image = $request->input('image') || '';
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $destination->image = $name;
+        }
         $destination->save();
         return redirect()->route('destination.index')->with('success', 'データが更新されました');
     }

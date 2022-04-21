@@ -17,6 +17,7 @@
                   <th scope="col">説明</th>
                   <th scope="col">料金</th>
                   <th scope="col">ノート</th>
+                  <th scope="col">イメージ</th>
                   <th scope="col" style="width: 90px;">オプション</th>
               </tr>
           </thead>
@@ -28,6 +29,7 @@
                   <td>{{ $vehicle->description }}</td>
                   <td>{{ $vehicle->cost }}</td>
                   <td>{{ $vehicle->note }}</td>
+                  <td><img src="../../images/{{ $vehicle->image }}" style="height: auto; width: 200px" />{{ $vehicle->image }}</td>
                   <td style="flex-direction: column; ">
                       <a href="{{ route('vehicle.edit', $vehicle->id) }}" class="btn btn-warning" style="margin-bottom: 10px">修正</a>
                       <form action="{{ route('vehicle.destroy', $vehicle->id) }}" method="POST">

@@ -41,7 +41,12 @@ class FoodController extends Controller
         $food->categoryId = 2;
         $food->name = $request->name;
         $food->description = $request->description;
-        $food->image = '';
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $food->image = $name;
+        }
         $food->save();
         return redirect()->route('food.index')->with('success', 'データが追加されました');
     }
@@ -82,7 +87,12 @@ class FoodController extends Controller
         $food = Food::findOrFail($id);
         $food->name = $request->input('name');
         $food->description = $request->input('description');
-        $food->image = '';
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $food->image = $name;
+        }
         $food->save();
         return redirect()->route('food.index')->with('success', 'データが更新されました');
     }

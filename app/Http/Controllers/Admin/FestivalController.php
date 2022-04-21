@@ -43,7 +43,12 @@ class FestivalController extends Controller
         $festival->name = $request->name;
         $festival->description = $request->description;
         $festival->duration = $request->duration;
-        $festival->image = '';
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $festival->image = $name;
+        }
         $festival->save();
         return redirect()->route('festival.index')->with('success', 'データが追加されました');
     }
@@ -86,7 +91,12 @@ class FestivalController extends Controller
         $festival->name = $request->input('name');
         $festival->description = $request->input('description');
         $festival->duration = $request->input('duration');
-        $festival->image = '';
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $festival->image = $name;
+        }
         $festival->save();
         return redirect()->route('festival.index')->with('success', 'データが更新されました');
     }

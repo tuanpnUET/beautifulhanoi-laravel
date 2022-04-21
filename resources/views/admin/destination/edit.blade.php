@@ -25,12 +25,12 @@
       <input type="text" class="form-control" id="link" name="link" value="{{ $destination->link }}">
     </div>
     <div class="form-group">
-      <label for="image">Image</label>
-      <input type="file" class="form-control" id="image" name="image" value="{{ $destination->image }}">
-    </div>  
-    <div class="form-group">
       <label for="openingTime">営業中</label>
       <input type="text" class="form-control" id="openingTime" name="openingTime" value="{{ $destination->openingTime }}">
+    </div>
+    <div class="form-group">
+      <label for="image">イメージ</label>
+      <input type="file" class="form-control" id="image" name="image" value="{{ $destination->image }}">
     </div>
       {{ method_field('PUT') }}
       <button type="submit" class="btn btn-primary" style="color: black">修正</button>

@@ -43,7 +43,12 @@ class VehicleController extends Controller
         $vehicle->description = $request->description;
         $vehicle->cost = $request->cost;
         $vehicle->note = $request->note;
-        $vehicle->image = '';
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $vehicle->image = $name;
+        }
         $vehicle->save();
         return redirect()->route('vehicle.index')->with('success', 'データが追加されました');
     }
@@ -86,7 +91,12 @@ class VehicleController extends Controller
         $vehicle->description = $request->input('description');
         $vehicle->cost = $request->input('cost');
         $vehicle->note = $request->input('note');
-        $vehicle->image = '';
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $vehicle->image = $name;
+        }
         $vehicle->save();
         return redirect()->route('vehicle.index')->with('success', 'データが更新されました');
     }

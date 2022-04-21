@@ -2,7 +2,7 @@
 @section('content-dashboard')
 <div class="container">
   <p style="margin-top: 10px; font-size: 18px" >新規お祭り追加</p>
-  <form method="post" action="<?php echo route('festival.store') ?>">
+  <form method="post" action="<?php echo route('festival.store') ?>" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="form-group">
       <label for="categoryId">カテゴリーID</label>
@@ -19,6 +19,10 @@
     <div class="form-group">
       <label for="duration">時間</label>
       <input type="text" class="form-control" id="duration" name="duration">
+    </div>
+    <div class="form-group">
+      <label for="image">イメージ</label>
+      <input type="file" class="form-control" id="image" name="image">
     </div>
     <button type="submit" class="btn btn-primary" style="color: black">新規追加</button>
   </form>

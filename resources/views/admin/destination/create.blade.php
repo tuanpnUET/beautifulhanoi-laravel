@@ -2,7 +2,7 @@
 @section('content-dashboard')
 <div class="container">
   <p style="margin-top: 10px; font-size: 18px" >新規観光地追加</p>
-  <form method="post" action="<?php echo route('destination.store') ?>"  enctype="multipart/form-data">
+  <form method="post" action="<?php echo route('destination.store') ?>" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="form-group">
       <label for="categoryId">カテゴリーID</label>
@@ -25,7 +25,7 @@
       <input type="text" class="form-control" id="link" name="link">
     </div>
     <div class="form-group">
-      <label for="image">Image</label>
+      <label for="image">イメージ</label>
       <input type="file" class="form-control" id="image" name="image">
     </div>
     <div class="form-group">
