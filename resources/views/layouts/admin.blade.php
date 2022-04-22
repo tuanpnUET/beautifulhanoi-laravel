@@ -21,6 +21,14 @@
 		</header>
         @guest
             @if (Route::has('login'))
+            <div class="bg_menu">
+                <a style="text-decoration: unset;" class="type5 hov myTab" href="index">ホーム</a>
+                <a style="text-decoration: unset;" class="type5 hov myTab" href="travel">観光地</a>
+                <a style="text-decoration: unset;" class="type5 hov myTab" href="food">名物料理</a>
+                <a style="text-decoration: unset;" class="type5 hov myTab" href="festival">お祭り</a>
+                <a style="text-decoration: unset;" class="type5 hov myTab" href="transport">交通</a>
+                <a style="text-decoration: unset;" class="type5 hov myTab" href="{{ route('login') }}">管理者</a>
+            </div>
             <p style="font-size: 16px; padding-left: 20%; padding-top: 50px;">すでにアカウントをお持ちの場合は<a href="{{ route('login') }}" style="color: red">ログイン</a>ください。</p><br>
             @endif
             @if (Route::has('register'))
