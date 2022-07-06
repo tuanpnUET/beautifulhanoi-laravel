@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content-dashboard')
 <div class="container">
-  <p style="margin-top: 10px; font-size: 18px" >新規観光地追加</p>
+  <p style="font-size: 20px; text-align: center; font-weight: bold;" >新規観光地追加</p>
   <form method="post" action="<?php echo route('destination.store') ?>" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="form-group">
